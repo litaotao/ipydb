@@ -128,6 +128,11 @@ class SqlMagics(Magics):
               help='pretty-print sql statement and exit')
     @argument('-o', '--output', action='store', dest='file',
               help='Write sql output as CSV to the given file')
+<<<<<<< HEAD
+=======
+    @argument('-d', '--debug', action='store_true',
+              help='In debug mode')
+>>>>>>> 119b7290c22dd125f7034d5e325641fa902a3f0d
     @argument('-P', '--pandas', action='store_true',
               help='Return data as pandas DataFrame')
     @argument('sql_statement',  help='The SQL statement to run', nargs="*")
@@ -172,6 +177,9 @@ class SqlMagics(Magics):
 
         """
         args = parse_argstring(self.sql, args)
+        if args.debug:
+            import ipdb; ipdb.set_trace()
+            print("\nIn debug mode:\n")
         params = None
         multiparams = None
         sql = ' '.join(args.sql_statement)
@@ -201,6 +209,7 @@ class SqlMagics(Magics):
             return self.ipydb.build_dataframe(cursor)
         if args.ret:
             return cursor
+<<<<<<< HEAD
         if cursor and cursor.returns_rows:
             if args.single:
                 self.ipydb.render_result(
@@ -209,6 +218,15 @@ class SqlMagics(Magics):
                 self.ipydb.render_result(
                     cursor, paginate=not bool(args.file), filepath=args.file)
          sql.__description__ = 'Run an sql statement against '
+=======
+        if args.single:
+            self.ipydb.render_result(
+                PivotResultSet(cursor), paginate=False, filepath=args.file)
+        else:
+            self.ipydb.render_result(
+                cursor, paginate=not bool(args.file), filepath=args.file)
+
+>>>>>>> 119b7290c22dd125f7034d5e325641fa902a3f0d
             
     @magic_arguments()
     @argument('-d', '--delimiter', action='store', default='/',

@@ -5,8 +5,13 @@ from setuptools import setup
 import ipydb
 
 requires = ['SQLAlchemy', 'ipython>=1.0', 'python-dateutil', 'sqlparse',
+<<<<<<< HEAD
             'future']
 tests_require = ['nose', 'mock==1.0.1']
+=======
+            'future', 'ipdb', 'pandas>=0.16.2']
+tests_require = ['nose', 'mock']
+>>>>>>> 119b7290c22dd125f7034d5e325641fa902a3f0d
 extras_require = ['Sphinx==1.2.3', 'sphinx-rtd-theme==0.1.6']
 description = "An IPython extension to help you write and run SQL statements"
 
